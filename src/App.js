@@ -13,6 +13,7 @@ function App() {
         throw new Error('Something went wrong. Data not found.');
       }
       const data = await response.json();
+
       setCountries(data);
     } catch (err) {
       console.error(err);
@@ -54,8 +55,47 @@ function App() {
 
   console.log(sortType);
 
+  const convertToSqMiles = (val) => {
+    return Math.round(val * 0.3861);
+  };
+
+  // prettier-ignore
+  const calcAvgPopulation = () => {
+    const sum = countries.reduce((acc, curr) => acc + curr.population, 0)
+    return (sum / countries.length).toFixed(1);
+  }
+
+  let countryWithMaxArea = { name: '', area: 0 };
+  let countryWithMinArea = { name: '', area: 10 };
+
+  const calcMaxArea = () => {
+    countries.forEach((c) => {
+      if (c.area > countryWithMaxArea.area) {
+        countryWithMaxArea.name = c.name;
+        countryWithMaxArea.area = c.area;
+      }
+    });
+
+    return countryWithMaxArea.name;
+  };
+
+  const calcMinArea = () => {
+    countries.forEach((c) => {
+      if (c.area < countryWithMinArea.area && c.area !== null) {
+        countryWithMinArea.name = c.name;
+        countryWithMinArea.area = c.area;
+      }
+    });
+
+    return countryWithMinArea.name;
+  };
+
   return (
     <Fragment>
+      <header>
+        <h1>REST Countries</h1>
+        <p>Learn about the world around you</p>
+      </header>
       <main>
         <section>
           <h3>Sort by:</h3>
@@ -87,13 +127,24 @@ function App() {
                   <tr key={country.alpha2Code}>
                     <td>{country.name}</td>
                     <td>{country.region}</td>
-                    <td>{country.area}</td>
-                    <td>{country.population}</td>
+                    <td>{convertToSqMiles(country.area)}</td>
+                    <td>{(country.population / 1_000_000).toFixed(1)}</td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
+        </section>
+        <section>
+          <h2>Summary</h2>
+          <h3>Average population:</h3>
+          <p>{calcAvgPopulation()}</p>
+
+          <h3>Country with the biggest area</h3>
+          <p>{calcMaxArea()}</p>
+
+          <h3>Country with the smallest area</h3>
+          <p>{calcMinArea()}</p>
         </section>
       </main>
     </Fragment>
