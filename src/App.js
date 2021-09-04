@@ -26,7 +26,8 @@ function App() {
 
   let sortedCountries = countries;
 
-  // SORTING
+  // ------ SORTING -------
+
   const sortByName = () => {
     sortedCountries = countries.sort((a, b) =>
       a.name.localeCompare(b.name, 'en', { sensitivity: 'base' })
@@ -53,7 +54,7 @@ function App() {
   if (sortType === 'population') sortByPopulation();
   if (sortType === 'area') sortByArea();
 
-  console.log(sortType);
+  // ------ TABLE 1 (COUNTRY LIST)-------
 
   const convertToSqMiles = (val) => {
     return Math.round(val * 0.3861);
@@ -88,6 +89,49 @@ function App() {
     });
 
     return countryWithMinArea.name;
+  };
+
+  // ------ TABLE 2 (LANGUAGE LIST)-------
+
+  const langaugeData = [];
+
+  countries.forEach((country) => {
+    country.languages.forEach((language) => {
+      langaugeData.push({
+        language: language.name,
+        countries: country.name,
+        population: country.population,
+      });
+    });
+  });
+
+  const filterLanguages = (data) => {
+    const filtered = [];
+
+    data.forEach((item) => {
+      const existing = filtered.filter((el) => {
+        return el.language === item.language;
+      });
+      if (existing.length) {
+        const existingIndex = filtered.indexOf(existing[0]);
+        // prettier-ignore
+        filtered[existingIndex].countries = filtered[existingIndex].countries.concat(item.countries);
+        // prettier-ignore
+        filtered[existingIndex].population += item.population;
+      } else {
+        if (typeof item.countries === 'string')
+          item.countries = [item.countries];
+        filtered.push(item);
+      }
+
+      return filtered.sort((a, b) => {
+        if (a.population === b.population) return 0;
+        if (a.population > b.population) return -1;
+        return 1;
+      });
+    });
+
+    return filtered;
   };
 
   return (
@@ -145,6 +189,29 @@ function App() {
 
           <h3>Country with the smallest area</h3>
           <p>{calcMinArea()}</p>
+        </section>
+        <div></div>
+        <section>
+          <table>
+            <thead>
+              <tr>
+                <td>Language</td>
+                <td>Countries</td>
+                <td>Population (mln)</td>
+              </tr>
+            </thead>
+            <tbody>
+              {filterLanguages(langaugeData).map((language) => {
+                return (
+                  <tr key={language.language}>
+                    <td>{language.language}</td>
+                    <td>{language.countries.join(', ')}</td>
+                    <td>{(language.population / 1_000_000).toFixed(1)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </section>
       </main>
     </Fragment>
