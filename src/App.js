@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import Banner from './components/Layout/Banner';
 import './App.css';
 
 function App() {
@@ -136,10 +137,7 @@ function App() {
 
   return (
     <Fragment>
-      <header>
-        <h1>REST Countries</h1>
-        <p>Learn about the world around you</p>
-      </header>
+      <Banner />
       <main>
         <section>
           <h3>Sort by:</h3>
@@ -181,17 +179,18 @@ function App() {
         </section>
         <section>
           <h2>Summary</h2>
-          <h3>Average population:</h3>
-          <p>{calcAvgPopulation()}</p>
+          <p>Average population:</p>
+          <h3>{calcAvgPopulation()}</h3>
 
-          <h3>Country with the biggest area</h3>
-          <p>{calcMaxArea()}</p>
+          <p>Country with the biggest area</p>
+          <h3>{calcMaxArea()}</h3>
 
-          <h3>Country with the smallest area</h3>
-          <p>{calcMinArea()}</p>
+          <p>Country with the smallest area</p>
+          <h3>{calcMinArea()}</h3>
         </section>
         <div></div>
         <section>
+          <h2>Languages</h2>
           <table>
             <thead>
               <tr>
