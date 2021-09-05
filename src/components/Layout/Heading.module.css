@@ -22,3 +22,24 @@
   top: 0;
   left: 0;
 }
+
+/* Tab-port  900px*/
+@media only screen and (max-width: 56.25em) {
+  .number {
+    width: 4rem;
+    height: 4rem;
+    font-size: 2rem;
+    top: 0.25rem;
+  }
+
+  .heading h2 {
+    margin-left: 5.5rem;
+  }
+}
+
+/* Phone  600px*/
+@media only screen and (max-width: 37.5em) {
+  .number {
+    top: 0;
+  }
+}

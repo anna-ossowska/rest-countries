@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
+
 import Banner from './components/Layout/Banner';
 import Card from './components/UI/Card';
-import './App.css';
 import Heading from './components/Layout/Heading';
 import SortDropdown from './components/Layout/SortDropdown';
 import Summary from './components/Summary/Summary';

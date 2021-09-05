@@ -1,5 +1,5 @@
 header {
-  height: 65vh;
+  height: 70vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,7 +84,7 @@ header {
 /* Phone  600px*/
 @media only screen and (max-width: 37.5em) {
   header {
-    height: 40vh;
+    height: 35vh;
   }
 
   .banner-img {
@@ -106,7 +106,7 @@ header {
   }
 
   .banner-text p {
-    font-size: 2rem;
+    font-size: 2.25rem;
     width: 25rem;
   }
 }

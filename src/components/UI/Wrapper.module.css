@@ -2,6 +2,27 @@
   width: 70%;
   margin: 9rem auto;
   background-color: var(--color-blue-light-1);
-  padding: 7rem;
+  padding: 6rem;
   border-radius: 1rem;
+}
+
+/* Big desktop */
+@media only screen and (min-width: 130em) {
+  .wrapper {
+    max-width: 120rem;
+  }
+}
+
+/* Tab-land 1200px*/
+@media only screen and (max-width: 75em) {
+  .wrapper {
+    width: 85%;
+  }
+}
+
+/* Tab-port  900px*/
+@media only screen and (max-width: 56.25em) {
+  .wrapper {
+    padding: 4rem;
+  }
 }

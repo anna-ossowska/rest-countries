@@ -17,3 +17,10 @@
 .population {
   width: 20%;
 }
+
+/* Tab-port  900px*/
+@media only screen and (max-width: 56.25em) {
+  .countries {
+    margin-top: 6rem;
+  }
+}

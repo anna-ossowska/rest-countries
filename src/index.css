@@ -36,8 +36,12 @@ body {
   font-weight: 300;
   line-height: 1.6;
   color: var(--color-grey-dark-1);
-  /* background-color: var(--color-white); GRADIENT */
-  background-color: var(--color-highlight-2);
+  background: linear-gradient(
+    90deg,
+    rgba(34, 45, 135, 1) 0%,
+    rgba(63, 87, 218, 1) 50%,
+    rgb(116, 53, 199) 100%
+  );
 }
 
 h1,
@@ -68,7 +72,7 @@ ul {
 }
 
 table {
-  margin: 3rem auto;
+  margin: 3rem auto 0;
   background-color: var(--color-white);
   width: 100%;
   font-size: 1.5rem;
@@ -84,17 +88,18 @@ thead {
 }
 
 thead td {
-  padding: 1rem 1.5rem;
+  padding: 1.3rem 1.5rem;
+  vertical-align: middle !important;
 }
 
 td {
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 1.5rem;
 }
 
 /* Tab-land 1200px*/
 @media only screen and (max-width: 75em) {
   html {
-    font-size: 58%;
+    font-size: 57%;
   }
 }
 
@@ -103,11 +108,32 @@ td {
   html {
     font-size: 54%;
   }
+
+  table {
+    font-size: 1.35rem;
+  }
 }
 
 /* Phone  600px*/
 @media only screen and (max-width: 37.5em) {
   html {
-    font-size: 32%;
+    font-size: 30%;
+  }
+
+  h1,
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  table {
+    font-size: 1rem;
+  }
+
+  tbody {
+    hyphens: auto;
   }
 }

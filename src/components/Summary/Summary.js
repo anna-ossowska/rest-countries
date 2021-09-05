@@ -35,8 +35,8 @@ const Summary = (props) => {
             <IconMinArea />
           </div>
           <div className={classes.content}>
-            <p>Country with the biggest area</p>
-            <h3>{props.maxArea}</h3>
+            <p>Country with the smallest area</p>
+            <h3>{props.minArea}</h3>
           </div>
         </div>
       </div>
