@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import { API_URL } from './config';
 
 import Banner from './components/Layout/Banner';
 import Card from './components/UI/Card';
@@ -14,7 +15,7 @@ function App() {
   const [sortType, setSortType] = useState('name');
 
   const fetchCountries = async () => {
-    const response = await fetch('https://restcountries.eu/rest/v2/all');
+    const response = await fetch(API_URL);
 
     try {
       if (!response.ok) {
@@ -32,9 +33,9 @@ function App() {
     fetchCountries();
   }, []);
 
-  let sortedCountries = countries;
-
   // ------ SORTING -------
+
+  let sortedCountries = countries;
 
   const sortByName = () => {
     sortedCountries = countries.sort((a, b) =>
@@ -62,7 +63,7 @@ function App() {
   if (sortType === 'population') sortByPopulation();
   if (sortType === 'area') sortByArea();
 
-  // ------ TABLE 1 (COUNTRY LIST)-------
+  // ------ TABLE 1 (COUNTRIES)-------
 
   const convertToSqMiles = (val) => {
     return Math.round(val * 0.3861);
@@ -78,10 +79,10 @@ function App() {
   let countryWithMinArea = { name: '', area: 10 };
 
   const calcMaxArea = () => {
-    countries.forEach((c) => {
-      if (c.area > countryWithMaxArea.area) {
-        countryWithMaxArea.name = c.name;
-        countryWithMaxArea.area = c.area;
+    countries.forEach((country) => {
+      if (country.area > countryWithMaxArea.area) {
+        countryWithMaxArea.name = country.name;
+        countryWithMaxArea.area = country.area;
       }
     });
 
@@ -89,17 +90,17 @@ function App() {
   };
 
   const calcMinArea = () => {
-    countries.forEach((c) => {
-      if (c.area < countryWithMinArea.area && c.area !== null) {
-        countryWithMinArea.name = c.name;
-        countryWithMinArea.area = c.area;
+    countries.forEach((country) => {
+      if (country.area < countryWithMinArea.area && country.area !== null) {
+        countryWithMinArea.name = country.name;
+        countryWithMinArea.area = country.area;
       }
     });
 
     return countryWithMinArea.name;
   };
 
-  // ------ TABLE 2 (LANGUAGE LIST)-------
+  // ------ TABLE 2 (LANGUAGES)-------
 
   const langaugeData = [];
 
@@ -159,7 +160,6 @@ function App() {
           maxArea={calcMaxArea()}
           minArea={calcMinArea()}
         />
-
         <Card>
           <Heading title="Languages" number="3" />
           <TableLanguages languages={filterLanguages(langaugeData)} />
