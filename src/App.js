@@ -2,9 +2,6 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { API_URL } from './config';
 
 import Banner from './components/Layout/Banner';
-import Card from './components/UI/Card';
-import Heading from './components/Layout/Heading';
-import SortDropdown from './components/Layout/SortDropdown';
 import Summary from './components/Summary/Summary';
 import TableCountries from './components/Tables/TableCountries';
 import TableLanguages from './components/Tables/TableLanguages';
@@ -147,23 +144,17 @@ function App() {
     <Fragment>
       <Banner />
       <Wrapper>
-        <Card>
-          <Heading title="Countires" number="1" />
-          <SortDropdown onSetSortType={setSortType} />
-          <TableCountries
-            countries={sortedCountries}
-            onConvert={convertToSqMiles}
-          />
-        </Card>
+        <TableCountries
+          countries={sortedCountries}
+          onConvert={convertToSqMiles}
+          onSetSortType={setSortType}
+        />
         <Summary
           population={calcAvgPopulation()}
           maxArea={calcMaxArea()}
           minArea={calcMinArea()}
         />
-        <Card>
-          <Heading title="Languages" number="3" />
-          <TableLanguages languages={filterLanguages(langaugeData)} />
-        </Card>
+        <TableLanguages languages={filterLanguages(langaugeData)} />
       </Wrapper>
     </Fragment>
   );
