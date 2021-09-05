@@ -1,0 +1,7 @@
+.wrapper {
+  width: 70%;
+  margin: 9rem auto;
+  background-color: var(--color-blue-light-1);
+  padding: 7rem;
+  border-radius: 1rem;
+}

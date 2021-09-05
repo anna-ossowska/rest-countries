@@ -1,6 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Banner from './components/Layout/Banner';
+import Card from './components/UI/Card';
 import './App.css';
+import Heading from './components/Layout/Heading';
+import SortDropdown from './components/Layout/SortDropdown';
+import Summary from './components/Summary/Summary';
+import TableCountries from './components/Tables/TableCountries';
+import TableLanguages from './components/Tables/TableLanguages';
+import Wrapper from './components/UI/Wrapper';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -138,81 +145,26 @@ function App() {
   return (
     <Fragment>
       <Banner />
-      <main>
-        <section>
-          <h3>Sort by:</h3>
-          <select
-            name="country-info"
-            id="country-info"
-            onChange={(e) => setSortType(e.target.value)}
-          >
-            <option value="name">Name</option>
-            <option value="population" defaultValue>
-              Population
-            </option>
-            <option value="area">Area</option>
-          </select>
-        </section>
-        <section>
-          <table>
-            <thead>
-              <tr>
-                <td>Name</td>
-                <td>Region</td>
-                <td>Area (mi²)</td>
-                <td>Population (mln)</td>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedCountries.map((country) => {
-                return (
-                  <tr key={country.alpha2Code}>
-                    <td>{country.name}</td>
-                    <td>{country.region}</td>
-                    <td>{convertToSqMiles(country.area)}</td>
-                    <td>{(country.population / 1_000_000).toFixed(1)}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </section>
-        <section>
-          <h2>Summary</h2>
-          <p>Average population:</p>
-          <h3>{calcAvgPopulation()}</h3>
+      <Wrapper>
+        <Card>
+          <Heading title="Countires" number="1" />
+          <SortDropdown onSetSortType={setSortType} />
+          <TableCountries
+            countries={sortedCountries}
+            onConvert={convertToSqMiles}
+          />
+        </Card>
+        <Summary
+          population={calcAvgPopulation()}
+          maxArea={calcMaxArea()}
+          minArea={calcMinArea()}
+        />
 
-          <p>Country with the biggest area</p>
-          <h3>{calcMaxArea()}</h3>
-
-          <p>Country with the smallest area</p>
-          <h3>{calcMinArea()}</h3>
-        </section>
-        <div></div>
-        <section>
-          <h2>Languages</h2>
-          <table>
-            <thead>
-              <tr>
-                <td>Language</td>
-                <td>Countries</td>
-                <td>Population (mln)</td>
-              </tr>
-            </thead>
-            <tbody>
-              {filterLanguages(langaugeData).map((language) => {
-                return (
-                  <tr key={language.language}>
-                    <td>{language.language}</td>
-                    <td>{language.countries.join(', ')}</td>
-                    <td>{(language.population / 1_000_000).toFixed(1)}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </section>
-      </main>
+        <Card>
+          <Heading title="Languages" number="3" />
+          <TableLanguages languages={filterLanguages(langaugeData)} />
+        </Card>
+      </Wrapper>
     </Fragment>
   );
 }

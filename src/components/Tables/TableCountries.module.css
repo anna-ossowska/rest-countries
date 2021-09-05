@@ -1,0 +1,19 @@
+.countries td {
+  border-bottom: 0.8px solid var(--color-grey-light-1);
+  vertical-align: top;
+}
+
+.name {
+  width: 40%;
+  border-left: 0.8px solid var(--color-grey-light-1);
+}
+
+.population {
+  border-right: 0.8px solid var(--color-grey-light-1);
+}
+
+.region,
+.area,
+.population {
+  width: 20%;
+}

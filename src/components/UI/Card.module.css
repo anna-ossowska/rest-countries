@@ -1,0 +1,9 @@
+.card {
+  background-color: var(--color-white);
+  padding: 4rem 6rem;
+  border-radius: 1rem;
+}
+
+.card:not(:last-child) {
+  margin-bottom: 4rem;
+}

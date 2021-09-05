@@ -1,0 +1,22 @@
+.languages td {
+  border-bottom: 0.8px solid var(--color-grey-light-1);
+  vertical-align: top;
+}
+
+.language,
+.population {
+  width: 20%;
+}
+
+.language {
+  border-left: 0.8px solid var(--color-grey-light-1);
+}
+
+.population {
+  border-right: 0.8px solid var(--color-grey-light-1);
+}
+
+.countries {
+  width: 60%;
+  text-align: justify;
+}
